@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,11 +31,19 @@ public class CityArrayAdapter extends ArrayAdapter<City> {
         }
 
         City city = cities.get(position);
-        TextView movieName = view.findViewById(R.id.textCityName);
-        TextView movieYear = view.findViewById(R.id.textCityProvince);
+        TextView cityName = view.findViewById(R.id.textCityName);
+        TextView cityProvince = view.findViewById(R.id.textCityProvince);
+        Button deleteButton = view.findViewById(R.id.button_delete); // Find the button
 
-        movieName.setText(city.getName());
-        movieYear.setText(city.getProvince());
+        cityName.setText(city.getName());
+        cityProvince.setText(city.getProvince());
+
+        // Set the click listener for the delete button
+        deleteButton.setOnClickListener(v -> {
+            if (context instanceof MainActivity) {
+                ((MainActivity) context).deleteCity(city);
+            }
+        });
 
         return view;
     }
